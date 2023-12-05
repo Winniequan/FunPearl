@@ -1,0 +1,15 @@
+{
+  "name": "funshop",
+  "version": "1.0.0",
+  "description": "e-commerce application build with mern stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Ying",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
