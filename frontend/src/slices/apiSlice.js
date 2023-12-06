@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// fetchBaseQuery make requests from the backend
+// fetchBaseQuery make requests from the backend ==> async 
 
 import { BASE_URL } from "../consants";
 
