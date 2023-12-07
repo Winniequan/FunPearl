@@ -4,7 +4,7 @@ const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : { cartItems: [] };
 //localStorage store strings parse into an object or initialState to be an empty array
-
+// 可以看到数据
 const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);
   //2个小数点
@@ -13,9 +13,10 @@ const addDecimals = (num) => {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducer: {
+  reducers: {// 复数
     addToCart: (state, action) => {
       const item = action.payload;
+
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
       if (existItem) {
