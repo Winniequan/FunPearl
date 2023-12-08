@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
+
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 
 const CartScreen = () => {
