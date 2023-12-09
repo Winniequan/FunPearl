@@ -34,7 +34,8 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // Encrypt password using bcrypt
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+   // pre do something before save to the database post is after
+  if (!this.isModified("password")) { // hashed
     next();
   }
 
