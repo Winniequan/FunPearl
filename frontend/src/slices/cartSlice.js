@@ -3,7 +3,7 @@ import { updateCart } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [] };
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
 //localStorage store strings parse into an object or initialState to be an empty array
 // 可以看到数据
 
@@ -29,9 +29,13 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((x)=> x._id !== action.payload);
       // return all remaining items and delete the one we want to delete
       return updateCart(state);
+    },
+    saveShippingAddress: (state,action) =>{
+      state.shippingAddress = action.payload;
+      return updateCart(state);
     }
   },
 });
 
-export const {addToCart, removeFromCart} = cartSlice.actions;
+export const {addToCart, removeFromCart, saveShippingAddress} = cartSlice.actions;
 export default cartSlice.reducer;
