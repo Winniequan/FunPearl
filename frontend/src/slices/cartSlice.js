@@ -10,7 +10,8 @@ const initialState = localStorage.getItem("cart")
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {// 复数
+  reducers: {
+    // 复数
     addToCart: (state, action) => {
       const item = action.payload;
 
@@ -23,19 +24,23 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
-     return updateCart(state);
+      return updateCart(state);
     },
-    removeFromCart: (state, action)=>{
-      state.cartItems = state.cartItems.filter((x)=> x._id !== action.payload);
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
       // return all remaining items and delete the one we want to delete
       return updateCart(state);
     },
-    saveShippingAddress: (state,action) =>{
+    saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
       return updateCart(state);
-    }
+    },
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+       localStorage.setItem("cart", JSON.stringify(state));
+    },
   },
 });
 
-export const {addToCart, removeFromCart, saveShippingAddress} = cartSlice.actions;
+export const {addToCart, removeFromCart, saveShippingAddress, savePaymentMethod} = cartSlice.actions;
 export default cartSlice.reducer;
