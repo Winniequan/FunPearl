@@ -5,7 +5,6 @@ import {
   Col,
   ListGroup,
   Image,
-  Form,
   Button,
   Card,
 } from "react-bootstrap";
@@ -18,6 +17,7 @@ import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPaypalClientIdQuery,
+  useDeliverOrderMutation,
 } from "../slices/orderApiSlice";
 
 const OrderScreen = () => {
@@ -29,6 +29,9 @@ const OrderScreen = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
@@ -88,7 +91,16 @@ const OrderScreen = () => {
         return orderID;
       });
   }
-
+   
+  const deliverOrderHandler = async()=>{
+    try {
+      await deliverOrder(orderId);
+      refetch();
+      toast.success("Order delivered")
+    } catch (err) {
+      toast.error(err?.data?.message || err.error)
+    }
+  }
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -195,7 +207,19 @@ const OrderScreen = () => {
                   )}
                 </ListGroup.Item>
               )}
-              {/*DELIVERED PLACEHOLDER */}
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverOrderHandler}
+                    >Mark As Delivered</Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
