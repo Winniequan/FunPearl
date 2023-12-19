@@ -2,9 +2,9 @@ import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PrivitaeRoute = () => {
+const AdminRoute = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  return userInfo ? <Outlet /> : <Navigate to="/login" replace />; // replace past history
+  return userInfo  && userInfo.isAdmin ? <Outlet /> : <Navigate to="/login" replace />; // replace past history
 };
 
-export default PrivitaeRoute;
+export default AdminRoute;
