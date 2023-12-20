@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 
+
 const HomeScreen = () => {
   const { keyword, pageNumber } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({
