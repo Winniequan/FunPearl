@@ -43,7 +43,7 @@ const ProductEditScreen = () => {
     }
   }, [product]);
 
-  const submitHandler = async(e)=>{
+  const submitHandler = async (e) => {
     e.preventDefault();
     const updatedProduct = {
       productId,
@@ -56,13 +56,13 @@ const ProductEditScreen = () => {
       countInStock,
     };
     const result = await updateProduct(updatedProduct);
-    if(result.error) {
-        toast.error(result.error);
-    }else{
-        toast.success("Product updated");
-        navigate("/admin/productlist");
+    if (result.error) {
+      toast.error(result.error);
+    } else {
+      toast.success("Product updated");
+      navigate("/admin/productlist");
     }
-  }
+  };
 
   return (
     <>
