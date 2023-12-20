@@ -14,9 +14,9 @@ import {
 import { toast } from "react-toastify";
 
 const ProductListScreen = () => {
-  const pageNumber = useParams();
+  const {pageNumber} = useParams();
   const { data, isLoading, error, refetch } = useGetProductsQuery({
-    pageNumber,
+    pageNumber
   });
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
