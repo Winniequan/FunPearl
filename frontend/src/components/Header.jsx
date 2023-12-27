@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import SearchBox from "./SearchBox";
+import { resetCart } from "../slices/cartSlice";
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
@@ -18,6 +19,7 @@ const Header = () => {
     try {
       await logoutApiCall().unwrap();
       dispath(logout());
+      dispath(resetCart());
       navigate("/login");
     } catch (err) {
       console.log(err);
